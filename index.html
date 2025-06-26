@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+    <style>
+        body { font-family: Arial; background:blue; text-align: center; padding: 20px; }
+        form { margin: 30px auto; }
+        .weather-box { background: skyblue; padding: 20px; display: inline-block; border-radius: 10px; box-shadow: 0 0 10px #aaa; }
+        img { vertical-align: middle; }
+    </style>
+</head>
+<body>
+    <h1>🌤️ Weather Info</h1>
+    <form method="POST">
+        <input type="text" name="city" placeholder="Enter city name" required>
+        <button type="submit">Check Weather</button>
+    </form>
+
+    {% if weather %}
+        <div class="weather-box">
+            {% if weather.error %}
+                <p style="color:red;">{{ weather.error }}</p>
+            {% else %}
+                <h2>{{ weather.city }}, {{ weather.country }}</h2>
+                <img src="{{ weather.icon }}" alt="Weather Icon">
+                <p><strong>{{ weather.description }}</strong></p>
+                <p>🌡️ Temp: {{ weather.temperature }}°C (Min: {{ weather.temp_min }}°C, Max: {{ weather.temp_max }}°C)</p>
+                <p>💧 Humidity: {{ weather.humidity }}%</p>
+                <p>💨 Wind Speed: {{ weather.wind_speed }} m/s</p>
+                <p>🌅 Sunrise: {{ weather.sunrise }}</p>
+                <p>🌇 Sunset: {{ weather.sunset }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>
